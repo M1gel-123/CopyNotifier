@@ -9,17 +9,17 @@ class CopyNotifier(QtWidgets.QWidget):
         super().__init__()
 
         self.text = "Copied"
-        self.font = QtGui.QFont("Segoe UI", 14, QtGui.QFont.Bold)  # Väčší font
+        self.font = QtGui.QFont("Segoe UI", 14, QtGui.QFont.Bold)  
         self.setWindowFlags(
             QtCore.Qt.Tool
             | QtCore.Qt.FramelessWindowHint
             | QtCore.Qt.WindowStaysOnTopHint
             | QtCore.Qt.X11BypassWindowManagerHint
-            | QtCore.Qt.WindowDoesNotAcceptFocus  # Skrytie v taskbare
+            | QtCore.Qt.WindowDoesNotAcceptFocus 
         )
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        # Počiatočná veľkosť pre loading (bodky)
+       
         self.setFixedSize(100, 60)
 
         self.opacity_effect = QtWidgets.QGraphicsOpacityEffect(self)
@@ -34,7 +34,7 @@ class CopyNotifier(QtWidgets.QWidget):
         self.move(self.center_x, self.bottom_y)
 
         self.anim_duration = 300  # ms
-        self.transition_duration = 400  # ms pre prechod
+        self.transition_duration = 400  # ms
         self.dot_phase = 0
         self.checkmark_progress = 0
         self.dots_opacity = 1.0
@@ -66,7 +66,7 @@ class CopyNotifier(QtWidgets.QWidget):
 
     def update_dots(self):
         if self.state == "loading":
-            self.dot_phase = (self.dot_phase + 0.1) % (2 * math.pi)  # Rýchlosť skákania
+            self.dot_phase = (self.dot_phase + 0.1) % (2 * math.pi)  
             self.update()
         elif self.state == "transition":
             self.dots_opacity = max(self.dots_opacity - 0.025, 0.0)
@@ -80,7 +80,7 @@ class CopyNotifier(QtWidgets.QWidget):
 
     def start_loading_animation(self):
         self.state = "loading"
-        self.setFixedSize(100, 60)  # Box pre bodky
+        self.setFixedSize(100, 60)  # Box
         self.center_x = (QtWidgets.QApplication.primaryScreen().geometry().width() - self.width()) // 2
         self.bottom_y = QtWidgets.QApplication.primaryScreen().geometry().height() + 10
         self.top_y = QtWidgets.QApplication.primaryScreen().geometry().height() - self.height() - 40
@@ -126,10 +126,10 @@ class CopyNotifier(QtWidgets.QWidget):
             return
 
         self.state = "showing"
-        # Box pre text "Copied"
+        # Box "Copied"
         metrics = QtGui.QFontMetrics(self.font)
-        text_width = metrics.horizontalAdvance(self.text) + 24  # Väčší padding
-        text_height = metrics.height() + 24  # Väčší padding
+        text_width = metrics.horizontalAdvance(self.text) + 24  
+        text_height = metrics.height() + 24  
         self.setFixedSize(text_width, text_height)
         self.center_x = (QtWidgets.QApplication.primaryScreen().geometry().width() - self.width()) // 2
         self.bottom_y = QtWidgets.QApplication.primaryScreen().geometry().height() + 10
